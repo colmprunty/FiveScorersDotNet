@@ -1,12 +1,11 @@
-using System;
 using Xunit;
 
 namespace FiveScorersDotNet.Tests
 {
-    public class UnitTest1
+    public class ChoicesControllerTests
     {
         [Fact]
-        public void Test1()
+        public void GetAllPlayersReturnsListOfAllPlayers()
         {
 
         }
