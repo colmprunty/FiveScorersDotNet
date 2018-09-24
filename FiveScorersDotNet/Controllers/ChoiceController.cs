@@ -6,8 +6,9 @@ namespace FiveScorersDotNet.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ChoiceController : ControllerBase
+    public class ChoiceController : Controller
     {
+        [HttpGet("[action]")]
         public IEnumerable<Player> GetAllPlayers()
         {
             return new List<Player>

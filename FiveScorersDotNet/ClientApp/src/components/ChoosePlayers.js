@@ -26,6 +26,7 @@ export class ChoosePlayers extends Component {
         this.state = { allPlayers: [], loading: true };
 
         fetch('api/Choice/GetAllPlayers')
+            .then(response => console.log(response))
             .then(response => response.json())
             .then(data => {
                 this.setState({ allPlayers: data, loading: false });
