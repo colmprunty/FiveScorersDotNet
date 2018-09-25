@@ -38,9 +38,7 @@ export class FetchData extends Component {
       .then(data => {
         this.setState({ forecasts: data, loading: false });
       });
-  }
-
-  
+  }  
 
   render() {
     let contents = this.state.loading

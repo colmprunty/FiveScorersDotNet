@@ -12,8 +12,8 @@ export class ChoosePlayers extends Component {
                 </thead>
                 <tbody>
                     {allPlayers.map(player =>
-                        <tr>
-                            <td>{player.Name}</td>
+                        <tr key={player.name}>
+                            <td>{player.name}</td>
                         </tr>
                     )}
                 </tbody>
@@ -25,8 +25,7 @@ export class ChoosePlayers extends Component {
         super(props);
         this.state = { allPlayers: [], loading: true };
 
-        fetch('api/Choice/GetAllPlayers')
-            .then(response => console.log(response))
+        fetch('api/Choice/GetAllPlayers')            
             .then(response => response.json())
             .then(data => {
                 this.setState({ allPlayers: data, loading: false });
