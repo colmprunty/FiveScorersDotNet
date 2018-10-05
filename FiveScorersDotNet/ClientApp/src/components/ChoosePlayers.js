@@ -4,32 +4,55 @@ export class ChoosePlayers extends Component {
 
     static renderPlayerList(allPlayers) {
         return (
-            <table className='table'>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {allPlayers.map(player =>
-                        <tr key={player.name}>
-                            <td>{player.name}</td>
+            <div>
+                <form onSubmit={this.handleSubmit}>
+                    <div>
+                        <input type="text" name="playerName" onChange={this.handleChange} />
+                    </div>
+                    <div>
+                        <input type="submit" value={this.state.selectedPlayer}/>
+                    </div>
+                </form>
+                <table className='table'>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
                         </tr>
-                    )}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {allPlayers.map(player => (
+                            <tr key={player.name}>
+                                <td>{player.name}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         );
     }
 
     constructor(props) {
         super(props);
-        this.state = { allPlayers: [], loading: true };
+        this.state = { allPlayers: [], loading: true, selectedPlayer: '' };        
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);        
 
         fetch('api/Choice/GetAllPlayers')            
             .then(response => response.json())
             .then(data => {
-                this.setState({ allPlayers: data, loading: false });
+                this.setState({ allPlayers: data, loading: false, selectedPlayer: 'colm' });
             });
+
+        alert(this.state);
+    }
+
+    handleChange(event) {
+        this.setState({ selectedPlayer: event.target.value });
+    }
+
+    handleSubmit(event) {
+        alert('balls');
+        event.preventDefault();
     }
 
     render() {
