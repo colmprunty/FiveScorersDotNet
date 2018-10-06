@@ -5,6 +5,7 @@ import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import { ChoosePlayers } from './components/ChoosePlayers';
+import { NameTest } from './components/NameTest';
 
 export default class App extends Component {
   displayName = App.name
@@ -16,6 +17,7 @@ export default class App extends Component {
         <Route path='/counter' component={Counter} />
         <Route path='/fetchdata' component={FetchData} />
         <Route path='/choosePlayers' component={ChoosePlayers} />
+        <Route path='/nameTest' component={NameTest} />
       </Layout>
     );
   }

@@ -43,7 +43,7 @@ export class ChoosePlayers extends Component {
                 this.setState({ allPlayers: data, loading: false, selectedPlayer: 'colm' });
             });
 
-        alert(this.state);
+        alert(this.state.selectedPlayer);
     }
 
     handleChange(event) {
