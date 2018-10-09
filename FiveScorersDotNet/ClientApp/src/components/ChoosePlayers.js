@@ -10,7 +10,7 @@ export class ChoosePlayers extends Component {
                         <input type="text" name="playerName" onChange={this.handleChange} />
                     </div>
                     <div>
-                        <input type="submit" value={this.state.selectedPlayer}/>
+                        <input type="submit" value={this.state.value}/>
                     </div>
                 </form>
                 <table className='table'>
@@ -33,17 +33,22 @@ export class ChoosePlayers extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { allPlayers: [], loading: true, selectedPlayer: '' };        
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);        
+        this.state = { allPlayers: [], loading: true, value: 'initial' };
 
-        fetch('api/Choice/GetAllPlayers')            
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
+    }
+
+    componentDidMount() {
+        fetch('api/Choice/GetAllPlayers')
             .then(response => response.json())
             .then(data => {
-                this.setState({ allPlayers: data, loading: false, selectedPlayer: 'colm' });
+                this.setState({ allPlayers: data, loading: false, value: 'colm' });
+                alert("this state");
             });
 
-        alert(this.state.selectedPlayer);
+        alert(this.state.allPlayers);
     }
 
     handleChange(event) {
