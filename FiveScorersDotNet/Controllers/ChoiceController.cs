@@ -20,6 +20,10 @@ namespace FiveScorersDotNet.Controllers
                 new Player
                 {
                     Name="Messi"
+                },
+                new Player
+                {
+                    Name="Salah"
                 }
             };
         }

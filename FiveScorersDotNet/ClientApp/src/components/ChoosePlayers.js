@@ -5,14 +5,7 @@ export class ChoosePlayers extends Component {
     static renderPlayerList(allPlayers) {
         return (
             <div>
-                <form onSubmit={this.handleSubmit}>
-                    <div>
-                        <input type="text" name="playerName" onChange={this.handleChange} />
-                    </div>
-                    <div>
-                        <input type="submit" value={this.state.value}/>
-                    </div>
-                </form>
+                <button onClick={this.makeChoice}>Make Choice</button>
                 <table className='table'>
                     <thead>
                         <tr>
@@ -35,29 +28,23 @@ export class ChoosePlayers extends Component {
         super(props);
         this.state = { allPlayers: [], loading: true, value: 'initial' };
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        //this.handleChange = this.handleChange.bind(this);
+        //this.handleSubmit = this.handleSubmit.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
+        this.makeChoice - this.makeChoice.bind(this);
     }
 
     componentDidMount() {
         fetch('api/Choice/GetAllPlayers')
             .then(response => response.json())
             .then(data => {
-                this.setState({ allPlayers: data, loading: false, value: 'colm' });
-                alert("this state");
+                this.setState({ allPlayers: data, loading: false, value: 'colm' });                
             });
-
-        alert(this.state.allPlayers);
     }
 
-    handleChange(event) {
-        this.setState({ selectedPlayer: event.target.value });
-    }
-
-    handleSubmit(event) {
-        alert('balls');
-        event.preventDefault();
+    makeChoice() {
+        console.log("sldfkjg");
+        alert("hello");
     }
 
     render() {
