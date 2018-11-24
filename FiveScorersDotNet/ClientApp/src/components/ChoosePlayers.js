@@ -2,27 +2,6 @@
 
 export class ChoosePlayers extends Component {
 
-    static renderPlayerList(allPlayers) {
-        return (
-            <div>
-                <button onClick={this.makeChoice}>Make Choice</button>
-                <table className='table'>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {allPlayers.map(player => (
-                            <tr key={player.name}>
-                                <td>{player.name}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-        );
-    }
 
     constructor(props) {
         super(props);
@@ -31,7 +10,8 @@ export class ChoosePlayers extends Component {
         //this.handleChange = this.handleChange.bind(this);
         //this.handleSubmit = this.handleSubmit.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
-        this.makeChoice - this.makeChoice.bind(this);
+        this.makeChoice = this.makeChoice.bind(this);
+        this.incrementCounter = this.incrementCounter.bind(this);
     }
 
     componentDidMount() {
@@ -43,20 +23,47 @@ export class ChoosePlayers extends Component {
     }
 
     makeChoice() {
-        console.log("sldfkjg");
-        alert("hello");
+        this.setState({
+            currentCount: this.state.currentCount + 1
+        });
+        console.log("increment");
+    }
+
+    incrementCounter() {
+        this.setState({
+            currentCount: this.state.currentCount + 1
+        });
+        console.log("increment");
     }
 
     render() {
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
-            : ChoosePlayers.renderPlayerList(this.state.allPlayers);
+            : <div>
+                <button onClick={this.makeChoice}>Make Choice</button>
+                <button onClick={this.incrementCounter}>Increment</button>
+                <table className='table'>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.allPlayers.map(player => (
+                            <tr key={player.name}>
+                                <td>{player.name}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
 
         return (
             <div>
                 <h1>Choose Players</h1>
                 <p>This should just be a list of players at the moment</p>
                 {contents}
+                
             </div>
         );
     }
