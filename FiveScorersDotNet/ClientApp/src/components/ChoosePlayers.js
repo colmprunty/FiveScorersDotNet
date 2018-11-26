@@ -23,10 +23,13 @@ export class ChoosePlayers extends Component {
     }
 
     makeChoice() {
-        this.setState({
-            currentCount: this.state.currentCount + 1
+        fetch('/api/Choice/AddChoice', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                allPlayers: this.state.allPlayers
+            })
         });
-        console.log("increment");
     }
 
     incrementCounter() {
