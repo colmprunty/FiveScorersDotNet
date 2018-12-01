@@ -29,7 +29,7 @@ namespace FiveScorersDotNet.Controllers
         }
 
         [HttpPost("[action]")]
-        public void AddChoice(object allPlayers)
+        public void AddChoice(object selectedPlayer)
         {
 
         }

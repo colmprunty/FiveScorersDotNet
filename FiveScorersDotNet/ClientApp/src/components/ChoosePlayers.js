@@ -23,12 +23,12 @@ export class ChoosePlayers extends Component {
             });
     }
 
-    makeChoice() {
+    makeChoice(selectedPlayer) {
         fetch('/api/Choice/AddChoice', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                allPlayers: this.state.allPlayers
+                selectedPlayer: selectedPlayer
             })
         });
     }
@@ -45,27 +45,25 @@ export class ChoosePlayers extends Component {
             ? <p><em>Loading...</em></p>
             : (<div>
                 <Autocomplete
-                    getItemValue={(item) => item.label}
-                    items={[
-                        { label: 'apple' },
-                        { label: 'banana' },
-                        { label: 'pear' }
-                    ]}
-                    renderItem={(item, isHighlighted) =>
+                    getItemValue={(player) => player.name}
+                    items={this.state.allPlayers}
+                    renderItem={(player, isHighlighted) =>
                         (<div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
-                            {item.label}
+                            {player.name}
                         </div>)
                     }
                     value={this.state.selectedPlayer}
-                    onChange={(e) => this.state.selectedPlayer = e.target.value}
-                    onSelect={(val) => this.state.selectedPlayer = val}
+                    onChange={(e) => this.setState({
+                        selectedPlayer: e.target.value
+                    })}
+                    onSelect={(val) => this.makeChoice(val)}
                 />
-            </div>)
+            </div>);
 
         return (
             <div>
                 <h1>Choose Players</h1>
-                <p>This should just be a list of players at the moment</p>
+                <p>Make a selection</p>
                 {contents}
                 
             </div>
