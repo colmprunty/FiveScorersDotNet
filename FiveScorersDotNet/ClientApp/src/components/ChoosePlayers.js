@@ -1,4 +1,5 @@
 ﻿import React, { Component } from 'react';
+import Autocomplete from 'react-autocomplete';
 
 export class ChoosePlayers extends Component {
 
@@ -18,7 +19,7 @@ export class ChoosePlayers extends Component {
         fetch('api/Choice/GetAllPlayers')
             .then(response => response.json())
             .then(data => {
-                this.setState({ allPlayers: data, loading: false, value: 'colm' });                
+                this.setState({ allPlayers: data, loading: false, selectedPlayer: '' });                
             });
     }
 
@@ -42,24 +43,24 @@ export class ChoosePlayers extends Component {
     render() {
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
-            : <div>
-                <button onClick={this.makeChoice}>Make Choice</button>
-                <button onClick={this.incrementCounter}>Increment</button>
-                <table className='table'>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.allPlayers.map(player => (
-                            <tr key={player.name}>
-                                <td>{player.name}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+            : (<div>
+                <Autocomplete
+                    getItemValue={(item) => item.label}
+                    items={[
+                        { label: 'apple' },
+                        { label: 'banana' },
+                        { label: 'pear' }
+                    ]}
+                    renderItem={(item, isHighlighted) =>
+                        (<div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
+                            {item.label}
+                        </div>)
+                    }
+                    value={this.state.selectedPlayer}
+                    onChange={(e) => this.state.selectedPlayer = e.target.value}
+                    onSelect={(val) => this.state.selectedPlayer = val}
+                />
+            </div>)
 
         return (
             <div>
