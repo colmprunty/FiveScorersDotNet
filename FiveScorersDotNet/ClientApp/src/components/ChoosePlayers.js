@@ -1,18 +1,14 @@
 ﻿import React, { Component } from 'react';
 import Autocomplete from 'react-autocomplete';
 
-export class ChoosePlayers extends Component {
-
+export class ChoosePlayers extends Component {  
 
     constructor(props) {
         super(props);
-        this.state = { allPlayers: [], loading: true, value: 'initial' };
+        this.state = { allPlayers: [], loading: true, value: 'initial', choices: [] };
 
-        //this.handleChange = this.handleChange.bind(this);
-        //this.handleSubmit = this.handleSubmit.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
         this.makeChoice = this.makeChoice.bind(this);
-        this.incrementCounter = this.incrementCounter.bind(this);
     }
 
     componentDidMount() {
@@ -31,13 +27,11 @@ export class ChoosePlayers extends Component {
                 selectedPlayer: selectedPlayer
             })
         });
-    }
 
-    incrementCounter() {
-        this.setState({
-            currentCount: this.state.currentCount + 1
-        });
-        console.log("increment");
+        this.state.choices.push({ "name": selectedPlayer });
+        this.state.allPlayers.splice(this.state.allPlayers.indexOf(selectedPlayer));
+        console.log(this.state.choices);
+        console.log(this.state.allPlayers);
     }
 
     render() {
@@ -58,6 +52,23 @@ export class ChoosePlayers extends Component {
                     })}
                     onSelect={(val) => this.makeChoice(val)}
                 />
+                <div>
+                    <h2>Your choices</h2>
+                    <table className='table'>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.state.allPlayers.map(player => (
+                                <tr key={player.name}>
+                                    <td>{player.name}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>);
 
         return (
@@ -65,7 +76,6 @@ export class ChoosePlayers extends Component {
                 <h1>Choose Players</h1>
                 <p>Make a selection</p>
                 {contents}
-                
             </div>
         );
     }
