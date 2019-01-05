@@ -70,7 +70,11 @@ export class ChoosePlayers extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            
+                            {this.state.selectedPlayers.map(player => (
+                                <tr key={player.name}>
+                                    <td>{player.name}</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>
