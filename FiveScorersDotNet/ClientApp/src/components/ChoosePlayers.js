@@ -29,7 +29,6 @@ export class ChoosePlayers extends Component {
         });
 
         this.state.choices.push({ "name": selectedPlayer });
-        this.state.allPlayers.splice(this.state.allPlayers.indexOf(selectedPlayer));
         console.log(this.state.choices);
         console.log(this.state.allPlayers);
     }
