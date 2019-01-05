@@ -5,10 +5,11 @@ export class ChoosePlayers extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { allPlayers: [], loading: true, value: 'initial', choices: [] };
+        this.state = { allPlayers: [], selectedPlayers: [], loading: true, value: 'initial', choices: [] };
 
         this.componentDidMount = this.componentDidMount.bind(this);
         this.makeChoice = this.makeChoice.bind(this);
+        this.getSelectedPlayers = this.getSelectedPlayers.bind(this);
     }
 
     componentDidMount() {
@@ -19,18 +20,27 @@ export class ChoosePlayers extends Component {
             });
     }
 
+    getSelectedPlayers() {
+        fetch('api/Choice/GetSelectedPlayers')
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ selectedPlayers: data });
+            });
+    }
+
     makeChoice(selectedPlayer) {
         fetch('/api/Choice/AddChoice', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                selectedPlayer: selectedPlayer
+                name: selectedPlayer
             })
         });
 
         this.state.choices.push({ "name": selectedPlayer });
         console.log(this.state.choices);
         console.log(this.state.allPlayers);
+        this.getSelectedPlayers();
     }
 
     render() {
@@ -60,11 +70,7 @@ export class ChoosePlayers extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.allPlayers.map(player => (
-                                <tr key={player.name}>
-                                    <td>{player.name}</td>
-                                </tr>
-                            ))}
+                            
                         </tbody>
                     </table>
                 </div>

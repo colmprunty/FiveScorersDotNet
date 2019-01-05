@@ -8,6 +8,8 @@ namespace FiveScorersDotNet.Controllers
     [ApiController]
     public class ChoiceController : Controller
     {
+        private readonly List<Player> _selectedPlayers = new List<Player>();
+
         [HttpGet("[action]")]
         public IEnumerable<Player> GetAllPlayers()
         {
@@ -29,9 +31,15 @@ namespace FiveScorersDotNet.Controllers
         }
 
         [HttpPost("[action]")]
-        public void AddChoice(object selectedPlayer)
+        public void AddChoice(Player selectedPlayer)
         {
+            _selectedPlayers.Add(selectedPlayer);
+        }
 
+        [HttpGet("[action]")]
+        public IEnumerable<Player> GetSelectedPlayers()
+        {
+            return _selectedPlayers;
         }
     }
 }
