@@ -21,26 +21,31 @@ export class ChoosePlayers extends Component {
     }
 
     getSelectedPlayers() {
+        console.log("fetching selected players");
         fetch('api/Choice/GetSelectedPlayers')
             .then(response => response.json())
             .then(data => {
-                this.setState({ selectedPlayers: data });
+                this.setState({ choices: data });
             });
+        console.log(this.state.choices);
     }
 
     makeChoice(selectedPlayer) {
+
         fetch('/api/Choice/AddChoice', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 name: selectedPlayer
-            })
+            })  
+        }).then(() => {
+            var currentChoices = this.state.choices;
+            currentChoices.push({ "name": selectedPlayer });
+            this.setState({ choices: currentChoices });
         });
-
-        this.state.choices.push({ "name": selectedPlayer });
+        
         console.log(this.state.choices);
-        console.log(this.state.allPlayers);
-        this.getSelectedPlayers();
+        console.log(this.state.allPlayers);        
     }
 
     render() {
@@ -70,7 +75,7 @@ export class ChoosePlayers extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.selectedPlayers.map(player => (
+                            {this.state.choices.map(player => (
                                 <tr key={player.name}>
                                     <td>{player.name}</td>
                                 </tr>
