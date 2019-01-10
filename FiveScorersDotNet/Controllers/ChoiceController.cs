@@ -41,5 +41,11 @@ namespace FiveScorersDotNet.Controllers
         {
             return _selectedPlayers;
         }
+
+        [HttpPost("[action]")]
+        public void RemoveChoice(Player selectedPlayer)
+        {
+            _selectedPlayers.Remove(selectedPlayer);
+        }
     }
 }

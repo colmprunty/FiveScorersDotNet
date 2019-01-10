@@ -43,9 +43,22 @@ export class ChoosePlayers extends Component {
             currentChoices.push({ "name": selectedPlayer });
             this.setState({ choices: currentChoices });
         });
-        
-        console.log(this.state.choices);
-        console.log(this.state.allPlayers);        
+    }
+
+    removePlayer(selectedPlayer) {
+        console.log("I am removing" + selectedPlayer);
+        fetch('/api/Choice/RemoveChoice', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: selectedPlayer
+            })
+        }).then(() => {
+            var currentChoices = this.state.choices;
+            var indexOfPlayerBeingRemoved = currentChoices.indexOf(selectedPlayer);
+            currentChoices.splice(indexOfPlayerBeingRemoved, 1);
+            this.setState({ choices: currentChoices });
+        });
     }
 
     render() {
@@ -68,7 +81,7 @@ export class ChoosePlayers extends Component {
                 />
                 <div>
                     <h2>Your choices</h2>
-                    <table className='table'>
+                    <table className='table choiceTable'>
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -78,6 +91,7 @@ export class ChoosePlayers extends Component {
                             {this.state.choices.map(player => (
                                 <tr key={player.name}>
                                     <td>{player.name}</td>
+                                    <td><input type='button' value='remove' onClick={() => this.removePlayer(player.name)} /></td>
                                 </tr>
                             ))}
                         </tbody>
