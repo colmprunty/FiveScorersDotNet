@@ -1,15 +1,18 @@
 ﻿using FiveScorersDotNet.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 namespace FiveScorersDotNet.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ChoiceController : Controller
     {
         private readonly List<Player> _selectedPlayers = new List<Player>();
 
+        [AllowAnonymous]
         [HttpGet("[action]")]
         public IEnumerable<Player> GetAllPlayers()
         {
