@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { Layout } from './components/Layout';
+import { LoginPage } from './LoginPage/LoginPage';
 import { ChoosePlayers } from './components/ChoosePlayers';
+import { PrivateRoute } from './components/PrivateRoute';
 
 export default class App extends Component {
   displayName = App.name
@@ -9,7 +11,8 @@ export default class App extends Component {
   render() {
     return (
       <Layout>
-        <Route exact path='/' component={ChoosePlayers} />
+            <PrivateRoute exact path='/' component={ChoosePlayers} />
+            <Route path="/login" component={LoginPage} />
       </Layout>
     );
   }
