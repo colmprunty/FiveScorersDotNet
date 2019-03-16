@@ -6,7 +6,7 @@ import { userActions } from '../actions/user.actions';
 class LoginPage extends React.Component {
     constructor(props) {
         super(props);
-        this.props.dispatch(userActions.logout());
+        //this.props.dispatch(userActions.logout());
     }
 
     render() {
