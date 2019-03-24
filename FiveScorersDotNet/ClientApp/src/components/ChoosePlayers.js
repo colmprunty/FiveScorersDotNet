@@ -1,7 +1,8 @@
 ﻿import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Autocomplete from 'react-autocomplete';
 
-export class ChoosePlayers extends Component {  
+class ChoosePlayers extends Component {  
 
     constructor(props) {
         super(props);
@@ -108,3 +109,15 @@ export class ChoosePlayers extends Component {
         );
     }
 }
+
+function mapStateToProps(state) {
+    const { users, authentication } = state;
+    const { user } = authentication;
+    return {
+        user,
+        users
+    };
+}
+
+const connectedChoosePlayers = connect(mapStateToProps)(ChoosePlayers);
+export { connectedChoosePlayers as ChoosePlayers };

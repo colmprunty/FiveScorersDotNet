@@ -1,11 +1,18 @@
-import React, { Component } from 'react';
-import { Route } from 'react-router';
-import { Layout } from '../components/Layout';
-import { LoginPage } from './LoginPage';
-import { ChoosePlayers } from '../components/ChoosePlayers';
-import { PrivateRoute } from '../components/PrivateRoute';
+import React from 'react';
+import { Router, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export default class App extends Component {
+import { Layout } from '../components';
+import { LoginPage } from '../LoginPage';
+import { ChoosePlayers } from '../components';
+import { PrivateRoute } from '../components';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    const { dispatch } = this.props;
+  }
   displayName = App.name
 
   render() {
@@ -17,3 +24,13 @@ export default class App extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  const { alert } = state;
+  return {
+      alert
+  };
+}
+
+const connectedApp = connect(mapStateToProps)(App);
+export { connectedApp as App }; 
