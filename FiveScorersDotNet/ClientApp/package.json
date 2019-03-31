@@ -2,6 +2,9 @@
   "name": "FiveScorersDotNet",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "webpack-dev-server --open"
+  },
   "dependencies": {
     "bootstrap": "^3.3.7",
     "npm": "^6.6.0",
@@ -14,18 +17,12 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "^2.1.8",
     "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
     "rimraf": "^2.6.2",
-    "typescript": "^3.3.3333"
-  },
-  "scripts": {
-    "start": "rimraf ./build && react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  },
-  "devDependencies": {
+    "typescript": "^3.3.3333",
     "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.5",
+    "babel-loader": "^8.0.5",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.24.1",

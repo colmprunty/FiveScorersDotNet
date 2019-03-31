@@ -1,17 +1,17 @@
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
-import './index.css';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+
+import { store } from './_helpers';
 import { App } from './App';
-//import registerServiceWorker from './registerServiceWorker';
 
-const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
-const rootElement = document.getElementById('root');
+// setup fake backend
+import { configureFakeBackend } from './_helpers';
+configureFakeBackend();
 
-ReactDOM.render(
-    <App />,
-  rootElement);
-
-//registerServiceWorker();
+render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('app')
+);
