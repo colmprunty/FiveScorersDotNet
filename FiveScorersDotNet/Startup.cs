@@ -5,9 +5,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using System.IO;
 using System.Text;
 
 namespace FiveScorersDotNet
@@ -56,10 +58,10 @@ namespace FiveScorersDotNet
 
 
             // In production, the React files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/build";
-            });
+            // services.AddSpaStaticFiles(configuration =>
+            // {
+            //     configuration.RootPath = "ClientApp/build";
+            // });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,8 +78,12 @@ namespace FiveScorersDotNet
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseSpaStaticFiles();
+            app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions { 
+                HotModuleReplacement = true,
+                ProjectPath = Path.Combine(env.ContentRootPath, @"ClientApp"),
+                ConfigFile = "webpack.config.js"
+            });
+
             app.UseAuthentication();
 
             app.UseMvc(routes =>

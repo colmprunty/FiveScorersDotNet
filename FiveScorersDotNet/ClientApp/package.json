@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "rimraf ./build"
+    "start": "webpack-dev-server --open"
   },
   "dependencies": {
     "history": "^4.6.3",
