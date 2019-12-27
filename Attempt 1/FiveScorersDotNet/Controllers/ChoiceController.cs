@@ -6,15 +6,14 @@ using System.Collections.Generic;
 namespace FiveScorersDotNet.Controllers
 {
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class ChoiceController : Controller
     {
         private readonly List<Player> _selectedPlayers = new List<Player>();
 
-        [AllowAnonymous]
-        [HttpGet("[action]")]
-        public IEnumerable<Player> GetAllPlayers()
+        [HttpGet]
+        public IEnumerable<Player> Get()
         {
             return new List<Player>
             {
