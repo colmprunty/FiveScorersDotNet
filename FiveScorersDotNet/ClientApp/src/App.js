@@ -9,7 +9,6 @@ import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizat
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
 
 import './custom.css'
-import { ChoosePlayers } from './components/ChoosePlayers';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -20,7 +19,6 @@ export default class App extends Component {
         <Route exact path='/' component={Home} />
         <Route path='/counter' component={Counter} />
         <AuthorizeRoute path='/fetch-data' component={FetchData} />
-        <AuthorizeRoute path='/choose-players' component={ChoosePlayers} />
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
       </Layout>
     );
