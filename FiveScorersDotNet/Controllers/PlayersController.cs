@@ -16,9 +16,10 @@ namespace FiveScorersDotNet.Controllers
         public async Task<IEnumerable<Player>> Get(){
             await Task.Delay(100);
 
-            return new List<Player> {
+            return new Player[] {
                 new Player{ Name = "Messi"},
-              new Player{ Name = "Cantona"}
+              new Player{ Name = "Cantona"},
+              new Player{ Name = "Aguero"}
             };
         }
     }

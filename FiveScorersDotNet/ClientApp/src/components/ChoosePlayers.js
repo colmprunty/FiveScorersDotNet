@@ -2,17 +2,38 @@ import React, { Component } from 'react';
 import authService from './api-authorization/AuthorizeService'
 
 export class ChoosePlayers extends Component {
-    constructor(props){
-        super(props);
-        this.state = { players: [] };
-    }
+  static displayName = ChoosePlayers.name;
+    
+  constructor(props){
+      super(props);
+      this.state = { players: [] };
+  }
 
-    componentDidMount() {
-        this.listPlayers();
-    }
+  componentDidMount() {
+      this.listPlayers();
+  }
+
+  static renderPlayerList(players){
+    return(
+        <table className='table table-striped' aria-labelledby="tabelLabel">
+          <thead>
+            <tr>
+              <th>Name</th>
+          </tr>
+          </thead>
+          <tbody>
+            {players.map(p =>
+              <tr key={p.name}>
+                <td>{p.name}</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+    )
+  }
 
     render(){
-        let contents = this.state.players;
+        let contents = ChoosePlayers.renderPlayerList(this.state.players);
 
         return(
             <div>
@@ -22,32 +43,12 @@ export class ChoosePlayers extends Component {
             </div>
         )
     }
-
-    static renderPlayerList(players){
-        return(
-            <table className='table table-striped' aria-labelledby="tabelLabel">
-        <thead>
-          <tr>
-            <th>Name</th>
-         </tr>
-        </thead>
-        <tbody>
-          {players.map(player =>
-            <tr key={player.name}>
-              <td>{player.name}</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-        )
-    }
-
+    
     async listPlayers(){
         const token = await authService.getAccessToken();
         const response = await fetch('players', {
             headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
           });
         const data = await response.json();
-        this.setState({ players: data });
-    }
+        this.setState({ players: data });    }
 }
