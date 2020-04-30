@@ -6,7 +6,8 @@ export class ChoosePlayers extends Component {
     
   constructor(props){
       super(props);
-      this.state = { players: [] };
+      this.state = { players: [], filteredPlayers: []};
+      this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -33,22 +34,45 @@ export class ChoosePlayers extends Component {
   }
 
     render(){
-        let contents = ChoosePlayers.renderPlayerList(this.state.players);
+        let contents = ChoosePlayers.renderPlayerList(this.state.filteredPlayers);
 
         return(
             <div>
                 <h1>A list of all players</h1>
                 <p>This is every player in the world</p>
+                <input type='text' placeholder='search' onChange={this.handleChange}></input>
                 {contents}
             </div>
         )
     }
     
     async listPlayers(){
-        const token = await authService.getAccessToken();
-        const response = await fetch('players', {
-            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
-          });
-        const data = await response.json();
-        this.setState({ players: data });    }
+      const token = await authService.getAccessToken();
+      const response = await fetch('players', {
+          headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+        });
+      const data = await response.json();
+      this.setState({ players: data, filteredPlayers: data });    
+    }
+
+    handleChange(e){
+      let fullList = [];
+      let filteredList = [];
+
+      if (e.target.value !== "") {
+        fullList = this.state.players;
+        filteredList = fullList.filter(item => {
+          const playerName = item.name.toLowerCase();
+          const searchTerm = e.target.value.toLowerCase();
+          return playerName.includes(searchTerm);
+        });
+      } 
+      else { 
+        filteredList = this.state.players;
+      }
+
+      this.setState({
+        filteredPlayers: filteredList
+      });
+    }
 }

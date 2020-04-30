@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using FiveScorersDotNet.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FiveScorersDotNet.Controllers
@@ -18,8 +16,8 @@ namespace FiveScorersDotNet.Controllers
 
             return new Player[] {
                 new Player{ Name = "Messi"},
-              new Player{ Name = "Cantona"},
-              new Player{ Name = "Aguero"}
+                new Player{ Name = "Cantona"},
+                new Player{ Name = "Aguero"}
             };
         }
     }
