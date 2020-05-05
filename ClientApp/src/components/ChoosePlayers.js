@@ -16,20 +16,25 @@ export class ChoosePlayers extends Component {
 
   static renderPlayerList(players){
     return(
-        <table className='table table-striped' aria-labelledby="tabelLabel">
-          <thead>
-            <tr>
-              <th>Name</th>
-          </tr>
-          </thead>
-          <tbody>
-            {players.map(p =>
-              <tr key={p.name}>
-                <td>{p.name}</td>
+      <div class="row mb-3">
+        <div class="col-md-6">
+            <table className='table table-striped' aria-labelledby="tabelLabel">
+              <thead>
+                <tr>
+                  <th>Name</th>
               </tr>
-            )}
-          </tbody>
-        </table>
+              </thead>
+              <tbody>
+                {players.map(p =>
+                  <tr key={p.name}>
+                    <td>{p.name}</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-6">Some other thing appearing to the side</div>
+        </div>
     )
   }
 
