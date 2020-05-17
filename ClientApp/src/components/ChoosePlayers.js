@@ -6,18 +6,19 @@ export class ChoosePlayers extends Component {
     
   constructor(props){
       super(props);
-      this.state = { players: [], filteredPlayers: []};
+      this.state = { players: [], selectedPlayers: [], filteredPlayers: []};
       this.handleChange = this.handleChange.bind(this);
+      this.choose = this.choose.bind(this);
   }
 
   componentDidMount() {
       this.listPlayers();
   }
 
-  static renderPlayerList(players){
+  static renderPlayerList(players, selectedPlayers){
     return(
-      <div class="row mb-3">
-        <div class="col-md-6">
+      <div className="row mb-3">
+        <div className="col-md-6">
             <table className='table table-striped' aria-labelledby="tabelLabel">
               <thead>
                 <tr>
@@ -28,18 +29,34 @@ export class ChoosePlayers extends Component {
                 {players.map(p =>
                   <tr key={p.name}>
                     <td>{p.name}</td>
+                    <td><button onClick={() => this.choose(p)}>Select</button></td>
                   </tr>
                 )}
               </tbody>
             </table>
           </div>
-          <div class="col-md-6">Some other thing appearing to the side</div>
+          <div className="col-md-6">
+          <table className='table table-striped' aria-labelledby="tabelLabel">
+              <thead>
+                <tr>
+                  <th>Name</th>
+              </tr>
+              </thead>
+              <tbody>
+                {selectedPlayers.map(p =>
+                  <tr key={p.name}>
+                    <td>{p.name}</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
     )
   }
 
     render(){
-        let contents = ChoosePlayers.renderPlayerList(this.state.filteredPlayers);
+        let contents = ChoosePlayers.renderPlayerList(this.state.filteredPlayers, this.state.selectedPlayers);
 
         return(
             <div>
@@ -50,14 +67,18 @@ export class ChoosePlayers extends Component {
             </div>
         )
     }
-    
+
     async listPlayers(){
       const token = await authService.getAccessToken();
       const response = await fetch('players', {
           headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
         });
       const data = await response.json();
-      this.setState({ players: data, filteredPlayers: data });    
+      this.setState({ players: data, filteredPlayers: data });
+    }
+
+    choose(p) {
+            console.log("hi");
     }
 
     handleChange(e){

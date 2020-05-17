@@ -20,5 +20,10 @@ namespace FiveScorersDotNet.Controllers
                 new Player{ Name = "Aguero"}
             };
         }
+
+        [HttpPost]
+        public async Task MakeChoice(IEnumerable<string> choices){
+            return;
+        }
     }
 }
