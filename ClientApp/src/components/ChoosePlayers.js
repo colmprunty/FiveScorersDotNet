@@ -15,7 +15,7 @@ export class ChoosePlayers extends Component {
       this.listPlayers();
   }
 
-  static renderPlayerList(players, selectedPlayers){
+  renderPlayerList(players, selectedPlayers){
     return(
       <div className="row mb-3">
         <div className="col-md-6">
@@ -29,7 +29,7 @@ export class ChoosePlayers extends Component {
                 {players.map(p =>
                   <tr key={p.name}>
                     <td>{p.name}</td>
-                    <td><button onClick={() => this.choose(p)}>Select</button></td>
+                    <td><button id={p.name} onClick={() => { this.choose(p) }}>Select</button></td>
                   </tr>
                 )}
               </tbody>
@@ -56,7 +56,7 @@ export class ChoosePlayers extends Component {
   }
 
     render(){
-        let contents = ChoosePlayers.renderPlayerList(this.state.filteredPlayers, this.state.selectedPlayers);
+        let contents = this.renderPlayerList(this.state.filteredPlayers, this.state.selectedPlayers);
 
         return(
             <div>
@@ -77,9 +77,13 @@ export class ChoosePlayers extends Component {
       this.setState({ players: data, filteredPlayers: data });
     }
 
-    choose(p) {
-            console.log("hi");
-    }
+    choose(player) {
+
+      let selectedList = this.state.selectedPlayers;
+      selectedList.push(player);
+      this.setState( { selectedPlayers : selectedList });
+     }
+  
 
     handleChange(e){
       let fullList = [];
