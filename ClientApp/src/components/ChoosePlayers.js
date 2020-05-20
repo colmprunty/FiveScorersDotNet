@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import authService from './api-authorization/AuthorizeService'
 
 export class ChoosePlayers extends Component {
@@ -9,6 +10,7 @@ export class ChoosePlayers extends Component {
       this.state = { players: [], selectedPlayers: [], filteredPlayers: []};
       this.handleChange = this.handleChange.bind(this);
       this.choose = this.choose.bind(this);
+      this.remove = this.remove.bind(this);
   }
 
   componentDidMount() {
@@ -44,8 +46,9 @@ export class ChoosePlayers extends Component {
               </thead>
               <tbody>
                 {selectedPlayers.map(p =>
-                  <tr key={p.name}>
+                  <tr key={p.id}>
                     <td>{p.name}</td>
+                    <td><button id={p.name} onClick={() => { this.remove(p) }}>Remove</button></td>
                   </tr>
                 )}
               </tbody>
@@ -78,13 +81,22 @@ export class ChoosePlayers extends Component {
     }
 
     choose(player) {
-
       let selectedList = this.state.selectedPlayers;
+      console.log(selectedList);
+
+      player.id = uuidv4();
       selectedList.push(player);
+      console.log(selectedList);
+
       this.setState( { selectedPlayers : selectedList });
      }
-  
 
+     remove(player){
+       let selectedList = this.state.selectedPlayers;
+       selectedList = selectedList.filter(p => p.id != player.id);
+       this.setState( { selectedPlayers : selectedList });
+     }
+  
     handleChange(e){
       let fullList = [];
       let filteredList = [];
