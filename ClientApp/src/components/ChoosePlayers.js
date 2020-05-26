@@ -81,19 +81,17 @@ export class ChoosePlayers extends Component {
     }
 
     choose(player) {
-      let selectedList = this.state.selectedPlayers;
-      console.log(selectedList);
+      var selectedList = this.state.selectedPlayers;
 
-      player.id = uuidv4();
-      selectedList.push(player);
-      console.log(selectedList);
+      var newPlayer = { id: uuidv4(), name: player.name };
+      selectedList.push(newPlayer);
 
       this.setState( { selectedPlayers : selectedList });
      }
 
      remove(player){
        let selectedList = this.state.selectedPlayers;
-       selectedList = selectedList.filter(p => p.id != player.id);
+       selectedList = selectedList.filter(p => p.id !== player.id);
        this.setState( { selectedPlayers : selectedList });
      }
   
