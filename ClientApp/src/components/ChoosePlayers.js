@@ -92,7 +92,16 @@ export class ChoosePlayers extends Component {
   }
 
   submitChoice(choices) {
-
+    fetch('MakeChoice', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        choices
+      })
+    });
   }
 
   remove(player) {

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FiveScorersDotNet.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("[controller]")]
     public class PlayersController : ControllerBase
@@ -24,7 +24,7 @@ namespace FiveScorersDotNet.Controllers
         }
 
         [HttpPost]
-        public async Task MakeChoice(IEnumerable<Player> choices)
+        public async Task MakeChoice(IEnumerable<string> choices)
         {
             return;
         }
