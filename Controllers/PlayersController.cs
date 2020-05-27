@@ -1,17 +1,19 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using FiveScorersDotNet.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FiveScorersDotNet.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class PlayersController : ControllerBase
     {
         [HttpGet]
-        public async Task<IEnumerable<Player>> Get(){
+        public async Task<IEnumerable<Player>> Get()
+        {
             await Task.Delay(100);
 
             return new Player[] {
@@ -22,7 +24,8 @@ namespace FiveScorersDotNet.Controllers
         }
 
         [HttpPost]
-        public async Task MakeChoice(IEnumerable<string> choices){
+        public async Task MakeChoice(IEnumerable<Player> choices)
+        {
             return;
         }
     }
