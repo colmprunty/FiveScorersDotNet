@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using FiveScorersDotNet.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -24,9 +25,10 @@ namespace FiveScorersDotNet.Controllers
         }
 
         [HttpPost]
-        public async Task MakeChoice(IEnumerable<string> choices)
+        [Route("makechoice")]
+        public async Task<string> MakeChoice(IEnumerable<Player> choices)
         {
-            return;
+            return string.Concat(choices.Select(x => x.Name)); 
         }
     }
 }

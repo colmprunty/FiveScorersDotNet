@@ -82,6 +82,19 @@ export class ChoosePlayers extends Component {
     this.setState({ players: data, filteredPlayers: data });
   }
 
+  async submitChoice(choices) {
+    const response = await fetch('/players/makechoice', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(
+        choices
+      )
+    });
+  }
+
   choose(player) {
     var selectedList = this.state.selectedPlayers;
 
@@ -89,19 +102,6 @@ export class ChoosePlayers extends Component {
     selectedList.push(newPlayer);
 
     this.setState({ selectedPlayers: selectedList });
-  }
-
-  submitChoice(choices) {
-    fetch('MakeChoice', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        choices
-      })
-    });
   }
 
   remove(player) {
