@@ -8,6 +8,7 @@ using FiveScorersDotNet.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MediatR;
 
 namespace FiveScorersDotNet
 {
@@ -35,6 +36,8 @@ namespace FiveScorersDotNet
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
+
+            services.AddMediatR(typeof(Startup));
 
             services.AddControllersWithViews();
             services.AddRazorPages();

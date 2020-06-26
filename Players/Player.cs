@@ -1,4 +1,4 @@
-namespace FiveScorersDotNet.Models
+namespace FiveScorersDotNet.Players
 {
     public class Player
     {
