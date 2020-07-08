@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MediatR;
+using Amazon.DynamoDBv2;
 
 namespace FiveScorersDotNet
 {
@@ -38,6 +39,11 @@ namespace FiveScorersDotNet
                 .AddIdentityServerJwt();
 
             services.AddMediatR(typeof(Startup));
+            services.AddSingleton<IAmazonDynamoDB>(d =>
+            {
+                var clientConfig = new AmazonDynamoDBConfig { ServiceURL = "http://localhost:8000" };
+                return new AmazonDynamoDBClient(clientConfig);
+            });
 
             services.AddControllersWithViews();
             services.AddRazorPages();

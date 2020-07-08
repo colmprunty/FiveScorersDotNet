@@ -1,14 +1,19 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Amazon.DynamoDBv2;
 using FiveScorersDotNet.Players;
 
 namespace FiveScorersDotNet.Data
 {
     public class DynamoDbChoicesDataService : IChoicesDataService
     {
-        public Task SaveChoice(IEnumerable<Player> players)
+        private readonly IAmazonDynamoDB _dynamoDbClient;
+        public DynamoDbChoicesDataService(IAmazonDynamoDB dynamoDBClient){
+            _dynamoDbClient = dynamoDBClient;
+        }
+        public async Task SaveChoice(IEnumerable<Player> players)
         {
-            throw new System.NotImplementedException();
+            await _dynamoDbClient.PutItemAsync("choices", players)
         }
     }
 }

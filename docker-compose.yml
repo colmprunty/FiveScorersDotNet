@@ -2,9 +2,11 @@ version: "3.8"
 
 services:
   dynamodb:
-    image: amazon/dynamodb-local:latest
-    ports:
-      - "8000:8000"
+    build:
+      context: ./docker-setup/dynamodb
+      dockerfile: Dockerfile
+    networks: 
+      fsdn_network:
 
   dynamodb-admin:
     image:  aaronshaf/dynamodb-admin
@@ -13,3 +15,8 @@ services:
       - "8001:8001"
     environment:
       - "DYNAMO_ENDPOINT=http://dynamodb:8000"
+    networks: 
+      fsdn_network:
+
+networks:
+  fsdn_network:
