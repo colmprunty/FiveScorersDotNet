@@ -2,9 +2,12 @@ version: "3.8"
 
 services:
   dynamodb:
+    container_name: dynamodb
     build:
       context: ./docker-setup/dynamodb
       dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
     networks: 
       fsdn_network:
 

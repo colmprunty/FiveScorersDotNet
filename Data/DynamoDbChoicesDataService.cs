@@ -13,7 +13,7 @@ namespace FiveScorersDotNet.Data
         }
         public async Task SaveChoice(IEnumerable<Player> players)
         {
-            await _dynamoDbClient.PutItemAsync("choices", players)
+            await _dynamoDbClient.PutItemAsync("choices", null);
         }
     }
 }
