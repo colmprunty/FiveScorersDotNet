@@ -11,4 +11,6 @@ RUN ./aws/install
 
 COPY create-table.sh .
 
+EXPOSE 8000
+
 ENTRYPOINT ["/bin/bash", "create-table.sh"]
