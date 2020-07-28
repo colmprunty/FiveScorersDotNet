@@ -2,14 +2,8 @@ version: "3.8"
 
 services:
   dynamodb:
+    image: amazon/dynamodb-local:latest
     container_name: dynamodb
-    build:
-      context: ./docker-setup/dynamodb
-      dockerfile: Dockerfile
-    environment:
-      - AWS_ACCESS_KEY_ID=dummy
-      - AWS_SECRET_ACCESS_KEY=dummy
-      - AWS_REGION=eu-west-1
     ports:
       - "8000:8000"
     networks: 
