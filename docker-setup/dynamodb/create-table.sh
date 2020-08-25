@@ -1,1 +1,1 @@
-aws dynamodb create-table --attribute-definitions AttributeName=Player,AttributeType=S --table-name Players --key-schema AttributeName=Player,KeyType=HASH --endpoint-url http://localhost:8000 --provisioned-throughput ReadCapacityUnits=3,WriteCapacityUnits=3 --region eu-west-1
+aws dynamodb create-table --attribute-definitions AttributeName=Player,AttributeType=S --table-name Players --key-schema AttributeName=Player,KeyType=HASH --endpoint-url http://dynamodb:8000 --provisioned-throughput ReadCapacityUnits=3,WriteCapacityUnits=3 --region eu-west-1
