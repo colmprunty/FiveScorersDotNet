@@ -47,6 +47,7 @@ namespace FiveScorersDotNet
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddTransient<IChoicesDataService, DynamoDbChoicesDataService>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

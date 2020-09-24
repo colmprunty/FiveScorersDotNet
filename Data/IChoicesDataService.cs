@@ -6,6 +6,6 @@ namespace FiveScorersDotNet.Data
 {
     public interface IChoicesDataService
     {
-        public Task SaveChoice(IEnumerable<Player> players);
+        public Task SaveChoice(Choice choices);
     }
 }
