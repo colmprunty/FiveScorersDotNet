@@ -1,21 +1,11 @@
 version: "3.8"
 
 services:
-  dynamodb:
-    image: amazon/dynamodb-local:latest
-    container_name: dynamodb
+  dynamodb-local-admin:
+    image: instructure/dynamo-local-admin
+    container_name: dynamo-local-admin
     ports:
       - "8000:8000"
-    networks: 
-      fsdn_network:
-
-  dynamodb-admin:
-    image:  aaronshaf/dynamodb-admin
-    container_name: dynamodb-ui
-    ports:
-      - "8001:8001"
-    environment:
-      - "DYNAMO_ENDPOINT=http://dynamodb:8000"
     networks: 
       fsdn_network:
 
